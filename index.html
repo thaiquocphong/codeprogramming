@@ -19,7 +19,7 @@
             });    
         </script>
     </head>
-    <body>
+    <body onkeydown="return false">
         <nav class="animate__animated animate__flip">
             <ul class="menu">
                 <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
@@ -353,5 +353,48 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="js/style.js"></script>
 <script>
+<script type='text/javascript'>
+    checkCtrl = false $('*').keydown(function(e) {
+        if (e.keyCode == '17') {
+            checkCtrl = false
+        }
+    }).keyup(function(ev) {
+        if (ev.keyCode == '17') {
+            checkCtrl = false
+        }
+    }).keydown(function(event) {
+        if (checkCtrl) {
+            if (event.keyCode == '85') {
+                return false;
+            }
+        }
+    })
+</script>
+
+<script type='text/javascript'>
+    var message = "NoRightClicking";
+    function defeatIE() {
+        if (document.all) {
+            (message);
+            return false;
+        }
+    }
+    function defeatNS(e) {
+        if (document.layers || (document.getElementById && !document.all)) {
+            if (e.which == 2 || e.which == 3) {
+                (message);
+                return false;
+            }
+        }
+    }
+    if (document.layers) {
+        document.captureEvents(Event.MOUSEDOWN);
+        document.onmousedown = defeatNS;
+    } else {
+        document.onmouseup = defeatNS;
+        document.oncontextmenu = defeatIE;
+    }
+    document.oncontextmenu = new Function("return false")
+</script>
 </body>
 </html>
